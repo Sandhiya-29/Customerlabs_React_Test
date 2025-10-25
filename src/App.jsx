@@ -31,50 +31,89 @@ function App() {
     setSelectedSchemas(selectedSchemas.filter((schema) => schema !== value));
   };
 
-  const handleSaveSegment = () => {
-  const data = {
-    segment_name: segmentName,
-    schema: selectedSchemas.map((s) => {
-      const option = schemaOptions.find((opt) => opt.value === s);
-      return { [s]: option.label };
-    }),
+//   const handleSaveSegment = () => {
+//   const data = {
+//     segment_name: segmentName,
+//     schema: selectedSchemas.map((s) => {
+//       const option = schemaOptions.find((opt) => opt.value === s);
+//       return { [s]: option.label };
+//     }),
+//   };
+
+//   if (!segmentName.trim()) {
+//     Swal.fire({
+//       icon: "warning",
+//       title: "Missing Name",
+//       text: "Please enter a segment name before saving.",
+//     });
+//     return;
+//   }
+
+//   console.log("Data to send:", data);
+
+//   fetch("https://webhook.site/9dce9685-eb00-46bc-a820-a7ab3e5b4beb", {
+//     method: "POST",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify(data),
+//   })
+//     .then((res) => res.json())
+//     .then((result) => {
+//      Swal.fire({
+//     icon: "success",
+//     title: "Segment Saved!",
+//     text: "Your segment has been saved successfully.",
+//     showConfirmButton: false,
+//     timer: 2000, 
+//   });
+//       console.log("Server response:", result);
+//     })
+//     .catch((err) => console.error("Error:", err));
+
+//   setShowPopup(false);
+//   setSegmentName("");
+//   setSelectedSchemas([]);
+// };
+
+
+const handleSaveSegment = async () => {
+  const payload = {
+    segmentName,
+    selectedSchemas,
   };
 
-  if (!segmentName.trim()) {
-    Swal.fire({
-      icon: "warning",
-      title: "Missing Name",
-      text: "Please enter a segment name before saving.",
+  try {
+    const response = await fetch("http://localhost:5000/send-segment", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
     });
-    return;
+
+    if (response.ok) {
+      Swal.fire({
+        icon: "success",
+        title: "Segment Sent!",
+        text: "Your segment data was successfully sent to the server.",
+      });
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Error",
+        text: "Failed to send data.",
+      });
+    }
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Error",
+      text: "Something went wrong while sending data.",
+    });
+    console.error("Error sending data:", error);
   }
-
-  console.log("Data to send:", data);
-
-  fetch("http://localhost:5000/segments", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-  })
-    .then((res) => res.json())
-    .then((result) => {
-     Swal.fire({
-    icon: "success",
-    title: "Segment Saved!",
-    text: "Your segment has been saved successfully.",
-    showConfirmButton: false,
-    timer: 2000, 
-  });
-      console.log("Server response:", result);
-    })
-    .catch((err) => console.error("Error:", err));
-
-  setShowPopup(false);
-  setSegmentName("");
-  setSelectedSchemas([]);
 };
 
-
+ 
   return (
     <div className="App">
       <button className="save-btn" onClick={() => setShowPopup(true)}>
