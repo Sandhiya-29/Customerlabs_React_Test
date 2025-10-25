@@ -1,38 +1,157 @@
 .App {
   text-align: center;
+  padding: 50px;
+  
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.save-btn {
+  padding: 10px 20px;
+  background-color: teal;
   color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+.save-btn:hover {
+  background-color: #007f7f;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.25);
+  transform: translateY(-2px);
+}
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.popup {
+  background: white;
+  padding: 25px;
+  width: 450px;
+  border-radius: 10px;
+  text-align: left;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.popup h2 {
+  margin-top: 0;
+  color: teal;
 }
+
+.popup input, .popup select {
+  width: 90%;
+  padding: 15px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  outline: none;
+
+}
+
+.schema-box {
+  border: 2px solid #a3d0e6;
+  padding: 10px;
+  border-radius: 6px;
+  background-color: #f9fdff;
+  margin-bottom: 15px;
+}
+
+.schema-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.schema-item select {
+  flex: 1;
+}
+
+.remove-btn {
+  background: #e1f0f8;
+  color: #007f7f;
+  border: none;
+  margin-left: 8px;
+  border-radius: 5px;
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+.add-schema-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.add-link {
+  color: teal;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.actions {
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.save {
+  background-color: teal;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.cancel {
+  background-color: #ddd;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor:pointer;
+}
+.legend {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+
+.legend-item {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 5px;
+}
+
+.user {
+  background-color: green;
+}
+
+.group {
+  background-color: #e74c8c; 
+}
+
+.neutral {
+  background-color: #ccc; 
+}
+
+.circle {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
